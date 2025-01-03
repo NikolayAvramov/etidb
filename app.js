@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 
 const userRoutes = require("./api/routes/userRoutes");
 const subscriptionRoutes = require("./api/routes/subscriptionRoutes");
-mongoose.connect("mongodb://127.0.0.1:27017/eti");
+mongoose.connect("mongodb://localhost:27017/eti");
 
 // mongoose.connect("mongodb://localhost:27017/eti?directConnection=true");
 
