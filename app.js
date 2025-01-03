@@ -6,17 +6,7 @@ const mongoose = require("mongoose");
 
 const userRoutes = require("./api/routes/userRoutes");
 const subscriptionRoutes = require("./api/routes/subscriptionRoutes");
-mongoose
-    .connect("mongodb://127.0.0.1:27017/eti", {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    })
-    .then(() => {
-        console.log("Connected to MongoDB");
-    })
-    .catch(err => {
-        console.error("MongoDB connection error:", err.message);
-    });
+mongoose.connect("mongodb://127.0.0.1:27017/eti");
 
 // mongoose.connect("mongodb://localhost:27017/eti?directConnection=true");
 
