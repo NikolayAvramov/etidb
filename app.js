@@ -3,16 +3,13 @@ const app = express();
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const cors = require("cors"); // Importing cors package
+const cors = require("cors");
 
 const userRoutes = require("./api/routes/userRoutes");
 const subscriptionRoutes = require("./api/routes/subscriptionRoutes");
 
 // MongoDB connection
-mongoose.connect("mongodb+srv://eti.jkbc7.mongodb.net/", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
+mongoose.connect("mongodb+srv://eti.jkbc7.mongodb.net/");
 
 // Middleware for logging HTTP requests
 app.use(morgan("dev"));
@@ -22,20 +19,22 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // CORS configuration
-const allowedOrigins = ["http://localhost:3000", "https://your-production-domain.com"];
+const allowedOrigins = ["http://localhost:3000", "https://etidb.onrender.com"];
 app.use(
     cors({
         origin: (origin, callback) => {
             if (!origin || allowedOrigins.includes(origin)) {
-                callback(null, true); // Allow the request
+                callback(null, true);
             } else {
-                callback(new Error("Not allowed by CORS")); // Reject the request
+                callback(new Error("Not allowed by CORS"));
             }
         },
-        methods: ["GET", "POST", "PUT", "DELETE", "PATCH"], // Allowed HTTP methods
-        allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
+        methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"], // Allow OPTIONS
+        allowedHeaders: ["Content-Type", "Authorization"],
     })
 );
+
+app.options("*", cors()); // Handle preflight requests
 
 // Routes
 app.use("/users", userRoutes);
@@ -50,8 +49,7 @@ app.use((req, res, next) => {
 
 // Error handling middleware
 app.use((error, req, res, next) => {
-    res.status(error.status || 500);
-    res.json({
+    res.status(error.status || 500).json({
         error: {
             message: error.message,
         },
