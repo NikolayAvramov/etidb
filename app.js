@@ -9,7 +9,7 @@ const userRoutes = require("./api/routes/userRoutes");
 const subscriptionRoutes = require("./api/routes/subscriptionRoutes");
 
 // MongoDB connection
-mongoose.connect("mongodb+srv://eti.jkbc7.mongodb.net/");
+mongoose.connect("mongodb+srv://avramov94:123456@eti.jkbc7.mongodb.net/");
 
 // Middleware for logging HTTP requests
 app.use(morgan("dev"));
