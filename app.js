@@ -6,9 +6,9 @@ const mongoose = require("mongoose");
 
 const userRoutes = require("./api/routes/userRoutes");
 const subscriptionRoutes = require("./api/routes/subscriptionRoutes");
-mongoose.connect("mongodb+srv://avramov94:123456@eti.jkbc7.mongodb.net/");
+//mongoose.connect("mongodb+srv://avramov94:123456@eti.jkbc7.mongodb.net/");
 
-// mongoose.connect("mongodb://localhost:27017/eti?directConnection=true");
+mongoose.connect("mongodb+srv://eti.jkbc7.mongodb.net/");
 
 app.use(morgan("dev")); ///  Morgan is a middleware library for logging HTTP requests in Node.js applications. It simplifies the process of monitoring and debugging by providing detailed logs for each request made to your server. These logs can include the request method, URL, status code, response time, and more.
 
@@ -16,10 +16,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // frontend URL
     res.header(
         "Access-Control-Allow-Headers",
-        "Origin, X-Requested-With, Accept, Authorization,Content-Type,X-Parse-Revocable-Session,X-Parse-Session-Token"
+        "Origin, X-Requested-With, Accept, Authorization, Content-Type, X-Parse-Revocable-Session, X-Parse-Session-Token"
     );
 
     if (req.method === "OPTIONS") {
