@@ -19,21 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // CORS configuration
-const allowedOrigins = ["http://localhost:3000", "https://etidb.onrender.com"];
-app.use(
-    cors({
-        origin: (origin, callback) => {
-            if (!origin || allowedOrigins.includes(origin)) {
-                callback(null, true);
-            } else {
-                callback(new Error("Not allowed by CORS"));
-            }
-        },
-        methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"], // Allow OPTIONS
-        allowedHeaders: ["Content-Type", "Authorization"],
-    })
-);
-
+app.use(cors());
 app.options("*", cors()); // Handle preflight requests
 
 // Routes
